@@ -168,3 +168,154 @@ window.addEventListener("mousemove", function (event) {
   }
 
 });
+
+
+
+/**
+ * LOAD AND LOG DESCRIPTIONS
+ */
+
+let menuData = [];
+
+const loadDescriptions = function () {
+  fetch('./assets/descriptions.json')
+    .then(response => response.json())
+    .then(data => {
+      menuData = data;
+      console.log("Menu Data:", data);
+      
+      // Loop through each category
+      data.forEach((categoryObj, index) => {
+        console.log(`\n--- Category ${index + 1}: ${categoryObj.category} ---`);
+        
+        // Loop through items in each category
+        categoryObj.items.forEach((item, itemIndex) => {
+          console.log(`Item ${itemIndex + 1}:`);
+          console.log(`  Name: ${item.name}`);
+          console.log(`  Description: ${item.description}`);
+          console.log(`  Price: ${item.price}`);
+          console.log(`  Image: ${item.src}`);
+        });
+      });
+
+      // After loading data, set up menu buttons
+      setupMenuButtons();
+    })
+    .catch(error => console.error('Error loading descriptions:', error));
+}
+
+// Call the function when page loads
+window.addEventListener("load", loadDescriptions);
+
+
+
+/**
+ * MENU MODAL
+ */
+
+const modalOverlay = document.querySelector('.modal-overlay');
+const modal = document.querySelector('.modal');
+const modalSlides = document.querySelector('#modalSlides');
+const leftArrow = document.querySelector('.left-arrow');
+const rightArrow = document.querySelector('.right-arrow');
+const closeBtn = document.querySelector('.modal-btn');
+
+let currentCategoryItems = [];
+let currentSlideIndex = 0;
+
+const setupMenuButtons = function () {
+  const menuButtons = document.querySelectorAll('.grid-list a.btn');
+  menuButtons.forEach(button => {
+    button.addEventListener('click', function (e) {
+      e.preventDefault();
+      const categoryName = this.querySelector('.text-1').textContent.trim();
+      openModalForCategory(categoryName);
+    });
+  });
+}
+
+const openModalForCategory = function (categoryName) {
+  const category = menuData.find(cat => cat.category === categoryName);
+  if (!category) return;
+
+  currentCategoryItems = category.items;
+  currentSlideIndex = 0;
+  renderSlides();
+  modalOverlay.classList.add('active');
+  modal.classList.add('active');
+}
+
+const renderSlides = function () {
+  modalSlides.innerHTML = ''; // Clear existing slides
+
+  currentCategoryItems.forEach((item, index) => {
+    const slide = document.createElement('div');
+    slide.className = 'slide';
+    if (index === 0) slide.classList.add('active');
+
+    slide.innerHTML = `
+      <h2>${item.name}</h2>
+      <p>${item.description}</p>
+      <div class="price">${item.price}</div>
+      <div class="image-placeholder">
+        <img src="${item.src}" alt="${item.name}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 8px;">
+      </div>
+    `;
+
+    modalSlides.appendChild(slide);
+  });
+}
+
+const showSlide = function (index) {
+  const slides = modalSlides.querySelectorAll('.slide');
+  slides.forEach((slide, i) => {
+    slide.classList.toggle('active', i === index);
+  });
+}
+
+const nextSlide = function () {
+  currentSlideIndex = (currentSlideIndex + 1) % currentCategoryItems.length;
+  showSlide(currentSlideIndex);
+}
+
+const prevSlide = function () {
+  currentSlideIndex = (currentSlideIndex - 1 + currentCategoryItems.length) % currentCategoryItems.length;
+  showSlide(currentSlideIndex);
+}
+
+const closeModal = function () {
+  modalOverlay.classList.remove('active');
+  modal.classList.remove('active');
+}
+
+// Event listeners for closing modal
+if (modalOverlay) modalOverlay.addEventListener('click', closeModal);
+if (closeBtn) closeBtn.addEventListener('click', closeModal);
+
+// Close modal with ESC key
+document.addEventListener('keydown', function (event) {
+  if (event.key === 'Escape' && modal.classList.contains('active')) {
+    closeModal();
+  }
+});
+
+// Navigate slides
+if (leftArrow) leftArrow.addEventListener('click', prevSlide);
+if (rightArrow) rightArrow.addEventListener('click', nextSlide);
+
+/**
+ * LOGO EXPLOSION
+ */
+
+const logo = document.querySelector('.logo');
+const explosion = document.getElementById('explosion');
+
+if (logo && explosion) {
+  logo.addEventListener('click', function(e) {
+    e.preventDefault();
+    explosion.classList.add('active');
+    setTimeout(() => {
+      explosion.classList.remove('active');
+    }, 3400);
+  });
+}

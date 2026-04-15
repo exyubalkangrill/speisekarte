@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modal Component Demo</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'DM Sans', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .container {
+            text-align: center;
+        }
+
+        .open-modal-btn {
+            padding: 15px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            background: #fff;
+            color: #667eea;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .open-modal-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            z-index: 1000;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 90%;
+        }
+
+        .modal.active {
+            display: block;
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .close-btn {
+            font-size: 28px;
+            font-weight: bold;
+            cursor: pointer;
+            float: right;
+            color: #667eea;
+            transition: color 0.3s;
+        }
+
+        .close-btn:hover {
+            color: #764ba2;
+        }
+
+        .modal h2 {
+            color: #667eea;
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: #555;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            background: #667eea;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal-btn:hover {
+            background: #764ba2;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: #667eea;
+            color: white;
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .arrow:hover {
+            background: #764ba2;
+        }
+
+        .left-arrow {
+            left: 10px;
+        }
+
+        .right-arrow {
+            right: 10px;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .modal-content {
+            position: relative;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <button class="open-modal-btn">🎯 Click Me to Open Modal</button>
+    </div>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- Modal Component -->
+    <div class="modal" id="myModal">
+        <span class="close-btn">&times;</span>
+        <div class="modal-content">
+            <button class="arrow left-arrow" id="leftArrow">&larr;</button>
+            <button class="arrow right-arrow" id="rightArrow">&rarr;</button>
+            <div class="slide active" id="slide1">
+                <h2>🍕 Welcome to Our Menu</h2>
+                <p>Explore our delicious selection of traditional Ex-Yu dishes. From hearty stews to fresh grilled meats, we have something for everyone!</p>
+            </div>
+            <div class="slide" id="slide2">
+                <h2>🥗 Fresh Ingredients</h2>
+                <p>All our dishes are made with the freshest local ingredients. We source from trusted farmers to ensure quality and flavor in every bite.</p>
+            </div>
+            <div class="slide" id="slide3">
+                <h2>🍷 Perfect Pairings</h2>
+                <p>Pair your meal with our selection of regional wines and beverages. Let our staff recommend the perfect complement to your dish.</p>
+            </div>
+        </div>
+        <button class="modal-btn" id="closeModalBtn">Close Modal</button>
+    </div>
+
+    <script>
+        const openBtn = document.querySelector(".open-modal-btn");
+        const modal = document.getElementById("myModal");
+        const closeBtn = document.querySelector(".close-btn");
+        const overlay = document.getElementById("modalOverlay");
+        const closeModalBtn = document.getElementById("closeModalBtn");
+        const leftArrow = document.getElementById("leftArrow");
+        const rightArrow = document.getElementById("rightArrow");
+        const slides = document.querySelectorAll(".slide");
+        let currentSlide = 0;
+
+        function showSlide(index) {
+            slides.forEach(slide => slide.classList.remove("active"));
+            slides[index].classList.add("active");
+        }
+
+        // Open modal
+        openBtn.addEventListener("click", function() {
+            modal.classList.add("active");
+            overlay.classList.add("active");
+            currentSlide = 0;
+            showSlide(currentSlide);
+        });
+
+        // Close modal via X button
+        closeBtn.addEventListener("click", function() {
+            modal.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+
+        // Close modal when clicking overlay
+        overlay.addEventListener("click", function() {
+            modal.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+
+        // Close modal via close button
+        closeModalBtn.addEventListener("click", function() {
+            modal.classList.remove("active");
+            overlay.classList.remove("active");
+        });
+
+        // Close modal with ESC key
+        document.addEventListener("keydown", function(event) {
+            if (event.key === "Escape" && modal.classList.contains("active")) {
+                modal.classList.remove("active");
+                overlay.classList.remove("active");
+            }
+        });
+
+        // Navigate slides
+        leftArrow.addEventListener("click", function() {
+            currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+            showSlide(currentSlide);
+        });
+
+        rightArrow.addEventListener("click", function() {
+            currentSlide = (currentSlide + 1) % slides.length;
+            showSlide(currentSlide);
+        });
+    </script>
+</body>
+</html>

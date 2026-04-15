@@ -1045,7 +1045,10 @@ body.nav-active { overflow: hidden; }
 
 .menu .section-title { margin-block-end: 40px; }
 
-.menu .grid-list { margin-block-end: 50px; }
+.menu .grid-list {
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  margin-block-end: 50px;
+}
 
 .menu-card {
   display: flex;
@@ -1098,6 +1101,10 @@ body.nav-active { overflow: hidden; }
 }
 
 .menu .btn {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  max-width: none;
   margin-inline: auto;
   margin-block-start: 26px;
 }

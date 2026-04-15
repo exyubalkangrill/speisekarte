@@ -1,0 +1,224 @@
+[
+  {
+    "category": "Balkan Frühstück",
+    "items": [
+      {
+        "name": "Balkan Frühstück",
+        "description": "Krapfenpfanne, Sudzuk, Rohschinken, Spiegeleier, Ajvar, Hirtenkäse und Nutella",
+        "price": "15€",
+        "src": "/images/dorucak.png"
+      }
+    ]
+  },
+  {
+    "category": "Suppen & Eintöpfe",
+    "items": [
+      {
+        "name": "Kalbsfleischsuppe",
+        "description": "Kalbfleischsuppe serviert mit hausgemachtem Brot",
+        "price": "10€",
+        "src": "/images/kalbsfleischsuppe.jpg"
+      },
+      {
+        "name": "Hühnersuppe mit Gemüse",
+        "description": "Hühnersuppe mit Gemüse serviert mit hausgemachtem Brot",
+        "price": "10€",
+        "src": "/images/begova.png"
+      },
+      {
+        "name": "Rindergulasch",
+        "description": "Rindergulasch mit Nudeln oder Kartoffelpüree serviert mit hausgemachtem Brot",
+        "price": "12€",
+        "src": "/images/gulas.png"
+      },
+      {
+        "name": "Bohnensuppe",
+        "description": "Bohnensuppe serviert mit hausgemachtem Brot",
+        "price": "12€",
+        "src": "/images/pasulj.png"
+      }
+    ]
+  },
+  {
+    "category": "Salate",
+    "items": [
+      {
+        "name": "Schopska Salat",
+        "description": "Frischer Salat mit Tomaten, Gurken und Käse",
+        "price": "5.50€",
+        "src": "/images/schopska-salat.jpg"
+      },
+      {
+        "name": "Krautsalat",
+        "description": "Frischer Salat mit Kohl",
+        "price": "4€",
+        "src": "/images/gemischter-salat.jpg"
+      },
+      {
+        "name": "Paprika in Schmand",
+        "description": "Hausgemachte Paprika in Schmand aus dem Balkan",
+        "price": "3€",
+        "src": "/images/balkansalat.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Beilagen",
+    "items": [
+      {
+        "name": "Kajmak",
+        "description": "Hausgemachter Kajmak aus dem Balkan",
+        "price": "3€",
+        "src": "/images/schopska-salat.jpg"
+      },
+      {
+        "name": "Ajvar",
+        "description": "Hausgemachter Ajvar aus dem Balkan",
+        "price": "1.50€",
+        "src": "/images/gemischter-salat.jpg"
+      },
+      {
+        "name": "Pommes Frites",
+        "description": "Pommes Frites mit Ketchup oder Mayonnaise",
+        "price": "4€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Gegrillte Paprika in Kajmak",
+        "description": "Gegrillte Paprika in Kajmak aus dem Balkan",
+        "price": "8€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Hausgemachtes Brot",
+        "description": "Hausgemachtes Brot",
+        "price": "2€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Hirtenkäse",
+        "description": "Hirtenkäse aus dem Balkan",
+        "price": "4€",
+        "src": "/images/balkansalat.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Balkan Grill Spezialitäten",
+    "items": [
+      {
+        "name": "Cevapcici 5 Stück",
+        "description": "Cevapcici serviert mit Zwiebeln und Ajvar",
+        "price": "8€",
+        "src": "/images/cevapcici.png"
+      },
+      {
+        "name": "Cevapcici 10 Stück",
+        "description": "Cevapcici serviert mit Zwiebeln und Ajvar",
+        "price": "13€",
+        "src": "/images/schopska-salat.jpg"
+      },
+      {
+        "name": "Gefüllte Pljeskavica",
+        "description": "Gefüllte Pljeskavica mit Käse und Schinken serviert mit Pommes Frites, Zwiebeln und Ajvar",
+        "price": "15€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Pljeskavica",
+        "description": "Pljeskavica serviert mit Pommes Frites, Zwiebeln und Ajvar",
+        "price": "12€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Hähnchenbrust",
+        "description": "Hähnchenbrust serviert mit Pommes Frites und Salat",
+        "price": "13€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Kalbsspieße",
+        "description": "Kalbsspieße serviert mit Pommes Frites und Salat",
+        "price": "16€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Pola Pola",
+        "description": "Cevapcici (5 St.), Kalbsspieß und Hähnchenspieß (ca.125g) serviert mit Pommes Frites und Salat",
+        "price": "18€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Kalbsbraten auf dem Offen",
+        "description": "Kalbsbraten auf dem Offen serviert mit Pommes Frites und Salat",
+        "price": "19€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Balkan Platte für 1 Personen",
+        "description": "Hühnersuppe (im Restaurant), Schopska-Salat, Krautsalat, Ajvar, Zwiebeln, Pommes Frites, Reis, 3 St. Cevapcici, 1 St. Pljeskavica, Kalbsbraten 100g, 1 St. Hähnchenbrust und 1 St. Hähnchenspieß",
+        "price": "22€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Balkan Platte für 2 Personen",
+        "description": "Hühnersuppe (im Restaurant), Schopska-Salat, Krautsalat, Ajvar, Zwiebeln, Pommes Frites, Reis, 6 St. Cevapcici, 2 St. Pljeskavica, Kalbsbraten 200g, 2 St. Hähnchenbrust und 2 St. Hähnchenspieß",
+        "price": "40€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Balkan Platte für 3 Personen",
+        "description": "Hühnersuppe (im Restaurant), Schopska-Salat, Krautsalat, Ajvar, Zwiebeln, Pommes Frites, Reis, 9 St. Cevapcici, 3 St. Pljeskavica, Kalbsbraten 300g, 3 St. Hähnchenbrust und 3 St. Hähnchenspieß",
+        "price": "57€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Balkan Platte für 4 Personen",
+        "description": "Hühnersuppe (im Restaurant), Schopska-Salat, Krautsalat, Ajvar, Zwiebeln, Pommes Frites, Reis, 12 St. Cevapcici, 4 St. Pljeskavica, Kalbsbraten 400g, 4 St. Hähnchenbrust und 4 St. Hähnchenspieß",
+        "price": "76€",
+        "src": "/images/balkansalat.jpg"
+      }
+    ]
+  },
+  {
+    "category": "Weitere Klassiker",
+    "items": [
+      {
+        "name": "Hähnchenbrust in Champignon-Sauce",
+        "description": "Hähnchenbrust in Champignon-Sauce serviert mit Reis",
+        "price": "14€",
+        "src": "/images/schopska-salat.jpg"
+      },
+      {
+        "name": "Hähnchen-Gemüsepfanne",
+        "description": "Hähnchen-Gemüsepfanne serviert mit Reis und gegrilltem Gemüse",
+        "price": "14€",
+        "src": "/images/schopska-salat.jpg"
+      },
+      {
+        "name": "EX-YU Crispy Chicken",
+        "description": "Paniertes Hähnchenfilet serviert mit Pommes Frites und Salat",
+        "price": "14€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Burger",
+        "description": "Burger mit hausgemachter Pljeskavica, Tomaten, Salat und Sauce",
+        "price": "8€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Cheesburger",
+        "description": "Cheesburger mit hausgemachter Pljeskavica, Käse, Tomaten, Salat und Sauce",
+        "price": "9€",
+        "src": "/images/balkansalat.jpg"
+      },
+      {
+        "name": "Crispyburger",
+        "description": "Crispybrger mit paniertem Hähnchenfilet, Käse, Tomaten, Salat und Sauce",
+        "price": "8€",
+        "src": "/images/balkansalat.jpg"
+      }
+    ]
+  }
+]

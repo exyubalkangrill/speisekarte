@@ -26,7 +26,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&display=swap"
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;700&family=Forum&family=Dancing+Script&display=swap"
       rel="stylesheet"
     />
 
@@ -34,6 +34,246 @@
     - custom css link
   -->
     <link rel="stylesheet" href="./assets/css/style.css" />
+
+    <style>
+        /* Modal Overlay */
+        .modal-overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 999;
+        }
+
+        .modal-overlay.active {
+            display: block;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: hsl(40, 12%, 5%);
+            color: white;
+            padding: 30px;
+            border-radius: 12px;
+            z-index: 1000;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            max-width: 600px;
+            width: 90%;
+        }
+
+        .modal.active {
+            display: block;
+            animation: slideIn 0.3s ease-in-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translate(-50%, -45%);
+            }
+            to {
+                opacity: 1;
+                transform: translate(-50%, -50%);
+            }
+        }
+
+        .modal h2 {
+            color: hsl(38, 61%, 73%);
+            margin-top: 20px;
+            margin-bottom: 15px;
+        }
+
+        .modal p {
+            color: white;
+            line-height: 1.6;
+            margin-bottom: 20px;
+        }
+
+        .modal-btn {
+            background: hsl(38, 61%, 73%);
+            color: hsl(40, 12%, 5%);
+            padding: 10px 20px;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .modal-btn:hover {
+            background: white;
+        }
+
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: hsl(38, 61%, 73%);
+            color: hsl(40, 12%, 5%);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            font-size: 20px;
+            border-radius: 50%;
+            transition: background 0.3s;
+        }
+
+        .arrow:hover {
+            background: white;
+        }
+
+        .left-arrow {
+            left: 10px;
+        }
+
+        .right-arrow {
+            right: 10px;
+        }
+
+        .slide {
+            display: none;
+        }
+
+        .slide.active {
+            display: block;
+        }
+
+        .modal-content {
+            position: relative;
+            padding-left: 60px;
+            padding-right: 60px;
+        }
+
+        .image-placeholder {
+            width: 100%;
+            height: 200px;
+            background: #f0f0f0;
+            border: 1px solid #ccc;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 15px;
+            border-radius: 8px;
+            font-size: 1.1em;
+            color: #666;
+        }
+
+        .price {
+            font-size: 1.2em;
+            font-weight: bold;
+            color: hsl(38, 61%, 73%);
+            margin-bottom: 10px;
+        }
+
+        /* Explosion Effect */
+        #explosion {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            z-index: 2000;
+            text-align: center;
+        }
+
+        #explosion.active {
+            display: block;
+            animation: explode 0.8s ease-in-out;
+        }
+
+        .heart {
+            font-size: 100px;
+            color: red;
+            opacity: 0;
+            animation: appear 1s ease-in-out 0.9s forwards, heartbeat 1s ease-in-out 0.9s infinite;
+        }
+
+        .dz-container {
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .eyes {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+            opacity: 0;
+            animation: appear 2.5s ease-in-out 0.9s forwards;
+        }
+
+        .eye {
+            width: 20px;
+            height: 20px;
+            background: blue;
+            border-radius: 50%;
+            margin: 0 10px;
+            animation: blink 2.5s ease-in-out 0s infinite;
+        }
+
+        .dz {
+            font-size: 100px;
+            color: #ff69b4; /* Hot pink */
+            font-family: 'Dancing Script', cursive;
+            font-weight: bold;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            opacity: 0;
+            animation: appear 2.5s ease-in-out 0.9s forwards;
+        }
+
+        @keyframes blink {
+            0%, 100% { transform: scaleY(1); }
+            50% { transform: scaleY(0.1); }
+        }
+
+        .fire {
+            position: absolute;
+            top: -50px;
+            left: -50px;
+            width: 200px;
+            height: 200px;
+            background: radial-gradient(circle, #ff4500, #ff6347, #ffa500, transparent);
+            border-radius: 50%;
+            animation: fire 0.8s ease-in-out forwards;
+            pointer-events: none;
+        }
+
+        @keyframes explode {
+            0% { transform: translate(-50%, -50%) scale(0); opacity: 1; }
+            25% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+            50% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; }
+            75% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.8; }
+            100% { transform: translate(-50%, -50%) scale(0); opacity: 0; }
+        }
+
+        @keyframes heartbeat {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+        }
+
+        @keyframes appear {
+            0% { opacity: 0; transform: scale(0); }
+            50% { opacity: 1; transform: scale(1.2); }
+            100% { opacity: 1; transform: scale(1); }
+        }
+
+        @keyframes fire {
+            0% { transform: scale(0) rotate(0deg); opacity: 1; }
+            25% { transform: scale(1) rotate(90deg); opacity: 1; }
+            50% { transform: scale(1.5) rotate(180deg); opacity: 0.8; }
+            75% { transform: scale(1) rotate(270deg); opacity: 0.5; }
+            100% { transform: scale(0) rotate(360deg); opacity: 0; }
+        }
+    </style>
 
     <!-- 
     - preload images
@@ -104,16 +344,15 @@
     <header class="header" data-header>
       <div class="container">
         <a href="#" class="logo">
-          <!-- <img
-            src="./assets/images/exyulogo.jpeg"
-            width="150"
+          <img
+            src="./assets/images/logo.png"
+            width="100"
             height="100"
             alt="Grilli - Home"
             style="border-radius: 50%;"
-          /> -->
-         
+          />
         </a>
-        <h2>Ex Yu  Balkan Grill</h2>
+        <!-- <h2>Ex Yu  Balkan Grill</h2> -->
         <nav class="navbar" data-navbar>
           <button class="close-btn" aria-label="close menu" data-nav-toggler>
             <ion-icon name="close-outline" aria-hidden="true"></ion-icon>
@@ -121,7 +360,7 @@
 
           <a href="#" class="logo">
             <img
-              src="./assets/images/logo.svg"
+              src="./assets/images/logo.png"
               width="160"
               height="50"
               alt="Grilli - Home"
@@ -153,13 +392,13 @@
               </a>
             </li>
 
-            <li class="navbar-item">
+            <!-- <li class="navbar-item">
               <a href="#" class="navbar-link hover-underline">
                 <div class="separator"></div>
 
                 <span class="span">Our Chefs</span>
               </a>
-            </li>
+            </li> -->
 
             <li class="navbar-item">
               <a href="#" class="navbar-link hover-underline">
@@ -196,11 +435,11 @@
           </div>
         </nav>
 
-        <a href="#" class="btn btn-secondary">
+        <!-- <a href="#" class="btn btn-secondary">
           <span class="text text-1">Tisch finden</span>
 
           <span class="text text-2" aria-hidden="true">Tisch finden</span>
-        </a>
+        </a> -->
 
         <button class="nav-open-btn" aria-label="open menu" data-nav-toggler>
           <span class="line line-1"></span>
@@ -664,7 +903,7 @@
         <!-- 
         - #MENU
       -->
-
+        
         <section class="section menu" aria-label="menu-label" id="menu">
           <div class="container">
             <p class="section-subtitle text-center label-2">
@@ -675,7 +914,14 @@
 
             <ul class="grid-list">
               <li>
-                <div class="menu-card hover:card">
+                <a href="#menu" class="btn btn-primary">
+                <span class="text text-1">Balkan Frühstück</span>
+
+                <span class="text text-2" aria-hidden="true"
+                  >Balkan Frühstück</span
+                >
+              </a>
+                <!-- <div class="menu-card hover:card">
                   <figure
                     class="card-banner img-holder"
                     style="--width: 100; --height: 100"
@@ -697,7 +943,7 @@
                         <a href="#" class="card-title">Balkan Frühstück</a>
                       </h3>
 
-                      <!-- <span class="badge label-1">Seasonal</span> -->
+                      <span class="badge label-1">Seasonal</span>
 
                       <span class="span title-2">15.00 &euro;</span>
                     </div>
@@ -706,737 +952,69 @@
                       Krapfenpfanne, Prosciutto, Sudzuk, Spiegeleier, Kase, Ajvar, Sauremilch, Nutella.
                     </p>
                   </div>
-                </div>
+                </div> -->
               </li>
 
               <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/burek.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Lasagne"
-                      class="img-cover"
-                    />
-                  </figure>
+                <a href="#menu" class="btn btn-primary">
+                <span class="text text-1">Suppen & Eintöpfe</span>
 
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Bosnischer Burek</a>
-                      </h3>
+                <span class="text text-2" aria-hidden="true"
+                  >Suppen & Eintöpfe</span
+                >
+              </a>
 
-                      <span class="span title-2">6.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Burek mit handgeschnittenem Hackfleisch.
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/begova.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Butternut Pumpkin"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Begova Suppe</a>
-                      </h3>
-
-                      <span class="span title-2">8.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Hühnersuppe mit Gemüse und hausgemachtem Brot und Krautsalat.
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/gulas.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Tokusen Wagyu"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Gulasch</a>
-                      </h3>
-
-                      <!-- <span class="badge label-1">New</span> -->
-
-                      <span class="span title-2">10.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Rindergulasch mit Nudeln, hausgemachtem Brot und Krautsalat.
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/pasulj.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Olivas Rellenas"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Pasulj</a>
-                      </h3>
-
-                      <span class="span title-2">10.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Bohnensuppe nach Balkanischer Art mit hausgemachtem Brot und Krautsalat.
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/cevapi.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">10 Cevapcici</a>
-                      </h3>
-
-                      <span class="span title-2">12.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Bratkartoffeln, Zwiebel, Ajvar, Hausgemachtes Pitabrod.
-                    </p>
-                  </div>
-                </div>
               </li>
               <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/cevapi.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
+                <a href="#menu" class="btn btn-primary">
+                <span class="text text-1">Salate</span>
 
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">5 Cevapcici</a>
-                      </h3>
+                <span class="text text-2" aria-hidden="true"
+                  >Salate</span
+                >
+              </a>
 
-                      <span class="span title-2">7.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Bratkartoffeln, Zwiebel, Ajvar, Hausgemachtes Pitabrod.
-                    </p>
-                  </div>
-                </div>
               </li>
               <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/pljeskavica.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
+                <a href="#menu" class="btn btn-primary">
+                  <span class="text text-1">Beilagen</span>
 
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Gefülltes Pljeskavica mit Käse.</a>
-                      </h3>
+                <span class="text text-2" aria-hidden="true"
+                  >Beilagen</span
+                >
+              </a>
 
-                      <span class="span title-2">12.50 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Bratkartoffeln, Hausgemachtes Pitabrod.
-                    </p>
-                  </div>
-                </div>
               </li>
               <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/piletina.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
+                <a href="#menu" class="btn btn-primary">
+                  <span class="text text-1">Balkan Grill Spezialitäten</span>
 
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Hähnchenbrust</a>
-                      </h3>
+                <span class="text text-2" aria-hidden="true"
+                  >Balkan Grill Spezialitäten</span
+                >
+              </a>
 
-                      <span class="span title-2">11.50 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Bratkartoffeln, Hausgemachtes Pitabrod.
-                    </p>
-                  </div>
-                </div>
               </li>
               <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/raznjici.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
+                <a href="#menu" class="btn btn-primary">
+                  <span class="text text-1">Weitere Klassiker</span>
 
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Kalbsspieße</a>
-                      </h3>
+                <span class="text text-2" aria-hidden="true"
+                  >Weitere Klassiker</span
+                >
+              </a>
 
-                      <span class="span title-2">15.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Bratkartoffeln, Hausgemachtes Pitabrod.
-                    </p>
-                  </div>
-                </div>
               </li>
               <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
+                <a href="#menu" class="btn btn-primary">
+                  <span class="text text-1">Kalte und Warme Getränke</span>
+
+                  <span class="text text-2" aria-hidden="true"
+                    >Kalte und Warme Getränke</span
                   >
-                    <img
-                      src="./assets/images/raznjici.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
+                </a>
 
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Pola Pola</a>
-                      </h3>
-
-                      <span class="span title-2">14.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      5 Cepapcici + Kalbsspieße,
-                      Bratkartoffeln, Hausgemachtes Pitabrod.
-                    </p>
-                  </div>
-                </div>
               </li>
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/pecenje.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Kalbsbraten</a>
-                      </h3>
-
-                      <span class="span title-2">17.50 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Kalbsbraten aus dem Ofen, Salat,
-                      Bratkartoffeln, Hausgemachtes Pitabrod.
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/plata.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Balkan Platte 1 Person</a>
-                      </h3>
-
-                      <span class="span title-2">20.50 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Hühnersuppe (Im Restaurant), Schopska-Salat, Krautsalat, Ajvar, Käse, Sauermilch, Cevapcici, Spieß vom KalbFleisch, Gefülltes Hacksteak, Kalbsbraten, Bratkartoffeln, Hähnchenbrust
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/plata.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Balkan Platte 2 Person</a>
-                      </h3>
-
-                      <span class="span title-2">40.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Hühnersuppe (Im Restaurant), Schopska-Salat, Krautsalat, Ajvar, Käse, Sauermilch, Cevapcici, Spieß vom KalbFleisch, Gefülltes Hacksteak, Kalbsbraten, Bratkartoffeln, Hähnchenbrust
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/plata.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Balkan Platte 3 Person</a>
-                      </h3>
-
-                      <span class="span title-2">51.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Hühnersuppe (Im Restaurant), Schopska-Salat, Krautsalat, Ajvar, Käse, Sauermilch, Cevapcici, Spieß vom KalbFleisch, Gefülltes Hacksteak, Kalbsbraten, Bratkartoffeln, Hähnchenbrust
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/plata.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Balkan Platte 4 Person</a>
-                      </h3>
-
-                      <span class="span title-2">68.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Hühnersuppe (Im Restaurant), Schopska-Salat, Krautsalat, Ajvar, Käse, Sauermilch, Cevapcici, Spieß vom KalbFleisch, Gefülltes Hacksteak, Kalbsbraten, Bratkartoffeln, Hähnchenbrust
-                    </p>
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/paprike.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Opu Fish"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Gegrillte Paprika in Kajmak</a>
-                      </h3>
-
-                      <span class="span title-2">8.00 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      
-                    </p>
-                  </div>
-                </div>
-              </li>
-              
-              
-            </ul>
-            <h2 class="headline-1 section-title text-center">Salate</h2>
-            <ul class="grid-list">
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/sopska.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Greek Salad"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Schopska-Salat</a>
-                      </h3>
-
-                      <!-- <span class="badge label-1">Seasonal</span> -->
-
-                      <span class="span title-2">4.50 &euro;</span>
-                    </div>
-
-                    <p class="card-text label-1">
-                      Tomaten, Gurken und Hartkäse.
-                    </p>
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/kupus.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Lasagne"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Krautsalat</a>
-                      </h3>
-
-                      <span class="span title-2">3.00 &euro;</span>
-                    </div>
-
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/paprikaupavlaci.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Butternut Pumpkin"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Paprika in Schmand</a>
-                      </h3>
-
-                      <span class="span title-2">3.00 &euro;</span>
-                    </div>
-                  </div>
-                </div>
-              </li>
-
-              
-              
-              
-            </ul>
-            <h2 class="headline-1 section-title text-center">Desserts</h2>
-            <ul class="grid-list">
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/baklava.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Greek Salad"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Baklava</a>
-                      </h3>
-
-                      <!-- <span class="badge label-1">Seasonal</span> -->
-
-                      <span class="span title-2">3.00 &euro;</span>
-                    </div>
-
-                    
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/hurmasice.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Lasagne"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Hurmasice / Dud</a>
-                      </h3>
-
-                      <span class="span title-2">3.00 &euro;</span>
-                    </div>
-
-                  </div>
-                </div>
-              </li>
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/kolac.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Lasagne"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Kuchen mit Bananenstückchen</a>
-                      </h3>
-
-                      <span class="span title-2">3.00 &euro;</span>
-                    </div>
-
-                  </div>
-                </div>
-              </li>
-
-              <li>
-                <div class="menu-card hover:card">
-                  <figure
-                    class="card-banner img-holder"
-                    style="--width: 100; --height: 100"
-                  >
-                    <img
-                      src="./assets/images/kuglice.jpeg"
-                      width="100"
-                      height="100"
-                      loading="lazy"
-                      alt="Butternut Pumpkin"
-                      class="img-cover"
-                    />
-                  </figure>
-
-                  <div>
-                    <div class="title-wrapper">
-                      <h3 class="title-3">
-                        <a href="#" class="card-title">Schokoladenkugeln</a>
-                      </h3>
-
-                      <span class="span title-2">2.00 &euro;</span>
-                    </div>
-                  </div>
-                </div>
-              </li>
-
-              
-              
-              
             </ul>
 
             <!-- <p class="menu-text text-center">
@@ -1901,7 +1479,7 @@
           <div class="footer-brand has-before has-after">
             <a href="#" class="logo">
               <img
-                src="./assets/images/logo.svg"
+                src="./assets/images/logo.png"
                 width="160"
                 height="50"
                 loading="lazy"
@@ -2025,6 +1603,32 @@
         </div>
       </div>
     </footer>
+
+    <!-- Modal Overlay -->
+    <div class="modal-overlay" id="modalOverlay"></div>
+
+    <!-- Modal Component -->
+    <div class="modal" id="myModal">
+        <div class="modal-content">
+            <button class="arrow left-arrow" id="leftArrow">&larr;</button>
+            <button class="arrow right-arrow" id="rightArrow">&rarr;</button>
+            <div id="modalSlides"></div>
+        </div>
+        <button class="modal-btn" id="closeModalBtn">Schließen</button>
+    </div>
+
+    <!-- Explosion Effect -->
+    <div id="explosion">
+        <div class="fire"></div>
+        <div class="heart">❤️</div>
+        <div class="dz-container">
+            <div class="eyes">
+                <div class="eye left-eye"></div>
+                <div class="eye right-eye"></div>
+            </div>
+            <div class="dz">DZ</div>
+        </div>
+    </div>
 
     <!-- 
     - #BACK TO TOP
